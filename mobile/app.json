@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "Toolfab Workforce",
+    "slug": "toolfab-workforce",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#12243a"
+    },
+    "android": {
+      "package": "com.toolfab.workforce"
+    },
+    "ios": {
+      "bundleIdentifier": "com.toolfab.workforce"
+    },
+    "updates": {
+      "enabled": false
+    }
+  }
+}

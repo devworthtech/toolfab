@@ -1,0 +1,12 @@
+{
+  "name": "toolfab-workforce-demo",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "web": "npm --prefix web run dev",
+    "web:build": "npm --prefix web run build",
+    "mobile": "npm --prefix mobile run start",
+    "mobile:android": "npm --prefix mobile run android",
+    "functions:build": "npm --prefix functions run build"
+  }
+}

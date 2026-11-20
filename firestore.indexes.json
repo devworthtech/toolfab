@@ -1,0 +1,11 @@
+{
+  "indexes": [
+    {"collectionGroup":"leaveRequests","queryScope":"COLLECTION","fields":[{"fieldPath":"department","order":"ASCENDING"},{"fieldPath":"createdAt","order":"DESCENDING"}]},
+    {"collectionGroup":"leaveRequests","queryScope":"COLLECTION","fields":[{"fieldPath":"employeeId","order":"ASCENDING"},{"fieldPath":"createdAt","order":"DESCENDING"}]},
+    {"collectionGroup":"leaveRequests","queryScope":"COLLECTION","fields":[{"fieldPath":"employeeId","order":"ASCENDING"},{"fieldPath":"status","order":"ASCENDING"}]},
+    {"collectionGroup":"otRequests","queryScope":"COLLECTION","fields":[{"fieldPath":"department","order":"ASCENDING"},{"fieldPath":"createdAt","order":"DESCENDING"}]},
+    {"collectionGroup":"otRequests","queryScope":"COLLECTION","fields":[{"fieldPath":"employeeId","order":"ASCENDING"},{"fieldPath":"createdAt","order":"DESCENDING"}]},
+    {"collectionGroup":"otRequests","queryScope":"COLLECTION","fields":[{"fieldPath":"employeeId","order":"ASCENDING"},{"fieldPath":"date","order":"ASCENDING"},{"fieldPath":"status","order":"ASCENDING"}]}
+  ],
+  "fieldOverrides": []
+}

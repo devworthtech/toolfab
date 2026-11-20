@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function profile() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    function role() { return signedIn() ? profile().role : null; }
+    function isHR() { return role() == 'hr'; }
+    function isHead() { return role() == 'department_head'; }
+    function sameDept(dept) { return signedIn() && profile().department == dept; }
+    function isOwner(uid) { return signedIn() && request.auth.uid == uid; }
+
+    match /users/{uid} {
+      allow read: if signedIn() && (isHR() || isOwner(uid) || (isHead() && sameDept(resource.data.department)));
+      // Create/edit employee profiles manually in Firebase Console for this demo.
+      allow create, delete: if false;
+      allow update: if isOwner(uid)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['displayName','phone','photoURL','updatedAt']);
+    }
+    match /departments/{deptId} {
+      allow read: if signedIn() && (isHR() || (isHead() && profile().department == deptId));
+      allow write: if isHR();
+    }
+    match /leaveRequests/{id} {
+      allow create, update, delete: if false; // Cloud Functions only.
+      allow read: if signedIn() && (isHR() || resource.data.employeeId == request.auth.uid || (isHead() && sameDept(resource.data.department)));
+    }
+    match /otRequests/{id} {
+      allow create, update, delete: if false; // Cloud Functions only.
+      allow read: if signedIn() && (isHR() || resource.data.employeeId == request.auth.uid || (isHead() && sameDept(resource.data.department)));
+    }
+    match /auditLogs/{id} {
+      allow read: if signedIn() && (isHR() || (isHead() && resource.data.department == profile().department));
+      allow write: if false;
+    }
+  }
+}
